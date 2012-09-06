@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>jQuery Mobile</title>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<link href="jquery.mobile-1.1.0.min.css" rel="stylesheet" type="text/css">
+<style>
+		#map-page { width: 100%; height: 100%; padding: 50; } 
+		#map-canvas {
+	width: 100%;
+	height: 90%;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 2px;
+	margin-left: 5px;
+}
+</style>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+
+</head>
+
+<body>
+	
+    <div data-role="page"  id="map-page">
+    	<div data-role="header" data-theme="a" data-add-back-btn="true">
+        	<h1>Geolocalización</h1>
+            
+        </div>
+        <div data-role="content" id="map-canvas">
+           <h3 align="center" >Conectando....</h3>
+ <script>  
+$( "#map-page" ).live( "pageinit", function() {
+	
+	var map, geocoder;
+	var defaultLatLng = new google.maps.LatLng(37.09, -95.71);  // Default Guayaquil, cuando no hay soporte de geolocalización
+	
+	if ( navigator.geolocation ) {
+		function success(pos) {
+			// Location found, show map with these coordinates
+			drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+		}
+		
+		function fail(error) {
+			console.log(error);
+			drawMap(defaultLatLng);  // Failed to find location, show default map
+		}
+		
+		// Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
+		navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+	} else {
+		drawMap(defaultLatLng);  // No geolocation support, show default map	
+	}
+
+	function drawMap(latlng) {
+		var myOptions = {
+			zoom: 14,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		
+		 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+		
+		// Add an overlay to the map of current lat/lng
+		var marker = new google.maps.Marker({
+			position: latlng,
+			map: map,
+			title: "Saludos de Wellington!"
+		});
+		
+          
+          // Adding a click event to the marker
+          google.maps.event.addListener(marker, 'click', function(e) {
+			   getAddress(e.latLng);
+            
+          });
+		
+	}
+	function getAddress(latLng) {
+
+    // Check to see if a geocoder object already exists
+    if (!geocoder) {
+      geocoder = new google.maps.Geocoder();
+    }
+
+    // Creating a GeocoderRequest object
+    var geocoderRequest = {
+      latLng: latLng
+    }
+
+    geocoder.geocode(geocoderRequest, function(results, status) {
+  
+
+      // Creating an InfowWindow          
+          var infowindow = new google.maps.InfoWindow();
+  
+      // Setting the position for the InfoWindow
+      infowindow.setPosition(latLng);
+  
+      // Creating content for the InfoWindow
+      var content = '<h3>Position: ' + latLng.toUrlValue() + '</h3>';
+  
+      // Check to see if the request went allright
+      if (status == google.maps.GeocoderStatus.OK) {
+	
+        // Looping through the result
+        for (var i = 0; i < results.length; i++) {
+          if (results[0].formatted_address) {
+            content += i + '. ' + results[i].formatted_address + '<br />';    			
+          }
+        }
+	
+      } else {
+        content += '<p>No address could be found. Status = ' + status + '</p>';
+      }
+
+      // Adding the content to the InfoWindow
+      infowindow.setContent(content);
+  
+      // Opening the InfoWindow
+      infowindow.open(map);
+
+    });	
+		
+  }
+	
+});
+               </script>            
+        </div>
+        
+        <div data-role="footer" data-position="fixed" data-id="pie1" data-theme="a">
+        	<h4>jorgeluix.wordpress.com </h4>
+        </div>
+    </div>
+
+
+</body>
+</html>

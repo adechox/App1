@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Geo</title>
+<link href="jquery.mobile-1.1.0.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
+
+<style type="text/css">
+.ui-page {
+	background-attachment: fixed;
+	background-image: url(images/Wall3x.jpg);
+	background-position: center center;
+}
+
+.ui-text {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color: #999999;
+	}
+</style>
+
+</head>
+
+
+<!----- PAGINA 1 ------>
+
+<body>
+
+	<div data-role="page" data-theme="a" id="formulario">
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+
+<div class="ui-grid-d">
+            
+  <div class="ui-block-a"> <span class="ui-text">GUIA TRANSPORTE</span></div>
+  
+  <div class="ui-block-b"> </div>  
+  <div style="text-align:center">
+  <div class="ui-block-c"> <a href="#home" data-transition="fade"> <img src="images/home.png"> </a></div> </div>
+  
+  <div style="text-align:right">
+  <div class="ui-block-d"> <a href="Busqueda.html" data-transition="fade"> <img src="images/buscaup.png"> </a></div> 
+  
+  <div class="ui-block-e"> <a href="formulario.html" data-transition="fade"> <img src="images/registrar.png"> </a></div> 
+</div>
+
+</div>
+</div>
+    
+		<!-- cracion de columnas ----->
+        
+		<div data-role="content">
+		  <div data-role="fieldcontain">
+		    <label for="textinput">Nombres:</label>
+		    <input type="text" name="textinput" id="textinput"   
+            required placeholder="Ingrese su nombre completo" data-mini="true">
+	      </div>
+		  <div data-role="fieldcontain">
+		    <label for="textinput2">Usuario:</label>
+		    <input type="text" name="textinput2" id="textinput2"
+            required placeholder="Ingrese usuario" data-mini="true">
+	      </div>
+		  <div data-role="fieldcontain">
+		    <label for="textinput3">Email:</label>
+		    <input type="text" name="textinput3" id="textinput3" data-mini="true">
+	      </div>
+		  <div data-role="fieldcontain">
+		    <label for="passwordinput">Contraseña:</label>
+		    <input type="password" name="passwordinput" id="passwordinput"
+            required placeholder="Ingrese Contraseña" data-mini="true">
+	      </div>
+		  <div data-role="fieldcontain">
+		    <label for="passwordinput2">Confirmar Contraseña:</label>
+		    <input type="password" name="passwordinput2" id="passwordinput2" 
+            required placeholder="Vuelva a ingresar la Contraseña" data-mini="true">
+	      </div>
+          
+		  <div data-role="controlgroup" data-type="horizontal">
+          <div align="right"> <br>
+        <a href="formulario2.html" data-role="button" data-icon="arrow-r" data-mini="true" data-transition="slide">Siguiente</a> </div>
+          
+      </div> </div>
+      
+<div data-role="footer" data-position="fixed" data-id="pie1">
+<h3> wwww.georgexluix.com </h3>
+</div>
+</div>
+
+</body>
+</html>
